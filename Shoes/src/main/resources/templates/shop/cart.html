@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/layout :: main-fragment(
+                                                                     ~{:: title},
+                                                                    'header',
+                                                                    'footer',
+                                                                     ~{:: #css-resources},
+                                                                     ~{:: #js-resources},
+                                                                     ~{:: #main-content}
+                                                                    )}">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+    <th:block id="css-resources">
+        <style>
+            .main-content .nav {
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            }
+
+            @media (max-width: 767px) {
+                .main-content .nav {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    overflow: scroll;
+                }
+                .main-content .nav-item {
+                    white-space: nowrap;
+                }
+            }
+        </style>
+        <link rel="stylesheet" th:href="@{/shop/css/custom.css}">
+    </th:block>
+</head>
+<body>
+<main id="main-content" class="container">
+    <div class="row">
+        <div class="col-lg-12 main-content-wrapper">
+            <div class="main-content">
+                <div class="nav-tab">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item"><div class="nav-link active order-status" data-status="1">Giỏ hàng</div></li>
+                    </ul>
+                </div>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="list-order" role="tabpanel" aria-labelledby="pending-tab">
+                            <!-- Item -->
+                            <th:block th:each="cart : ${carts}">
+                                <div class="item" th:id="'item_cart_' +  ${cart.cartId}">
+                                    <div class="header-item">
+                                        <div class="order-number-wrapper">
+                                        </div>
+                                        <button class="button-remove-cart full-details" th:attr="data-cartId=${cart.cartId}">Xoá khỏi giỏ hàng</button>
+                                    </div>
+                                    <div class="item-info-wrapper">
+                                        <div class="product-info-wrapper">
+                                            <input type="checkbox" name="cart_selector" class="item-selector col-lg-1" th:attr="data-cartId=${cart.cartId}"/>
+                                            <div class="thumbnails"><img class="img-fluid" th:src="${cart.productImage}" alt="Ten san pham"/></div>
+                                            <div class="product-info"><span class="name" th:utext="${cart.productName}">Ten san pham</span>
+                                                <div class="size"><span>Size: </span><span th:utext="${cart.size}"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="price bid-price"><span class="text-price" th:text="${cart.price}">0 d</span> &#x20AB;</div>
+                                    </div>
+                                </div>
+                            </th:block>
+                    </div>
+                </div>
+                <th:block th:if="${carts.size()} > 0">
+                    <div class="collapse show" id="order-cart-section">
+                        <button type="button" class="btn btn-primary confirm-btn red-btn" id="btn-choose-cart-item" style="font-family: Helvetica">ĐẶT HÀNG</button>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</main>
+
+<th:block id="js-resources">
+    <script th:src="@{/shop/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/shop/js/plugins.min.js}"></script>
+
+    <script th:inline="javascript">
+        formatMoney();
+        $('.button-remove-cart').click(function() {
+            let cartId = $(this).data('cartid');
+            $.ajax({
+                url: '/api/delete-carts?cartId='+cartId,
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                success: function(data) {
+                    toastr.success("Bỏ khỏi giỏ hàng thành công");
+                    document.getElementById("item_cart_" + cartId).remove();
+                },
+                error: function(data) {
+                    toastr.warning("Có lỗi xảy ra khi bỏ sản phẩm này, thử lại");
+                }
+            });
+        })
+
+        $('#btn-choose-cart-item').click(function() {
+            let itemSelected = [];
+            $("input:checkbox[name=cart_selector]:checked").each(function(){
+               itemSelected.push($(this).data('cartid'));
+            });
+
+            //user not choose any item cart
+            if(itemSelected.length == 0) {
+                toastr.warning("Chưa có sản phâm nào được chọn để đặt hàng");
+                return;
+            }
+            else{
+                location.href = "/dat-hang?item=" + itemSelected;
+            }
+        })
+    </script>
+</th:block>
+</body>
+</html>

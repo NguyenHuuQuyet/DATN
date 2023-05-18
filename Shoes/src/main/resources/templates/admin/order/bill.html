@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" th:href="@{/adminlte/css/main.css}">
+  <title>Document</title>
+</head>
+
+<body>
+  <main class="main">
+    <!-- header -->
+    <!--time ref-->
+    <div class="header">
+      <div>
+        <p>Mã hoá đơn: <span id="invoiceNumber"th:text="${order.id}"></span></p>
+      </div>
+      <p>Ngày lập: <span id="invoiceDate" th:text="${#calendars.format(#calendars.createNow(), 'dd/ MM/ yyyy')}"></span></p>
+    </div>
+    <!--time ref end-->
+    <!--company info-->
+    <div class="companyInfo">
+      <div>
+        <h3>SHOES</h3>
+        <p>Địa chỉ: SN 50, thị trấn triệu sơn, Thanh Hoá </p>
+        <p>Số điện thoại: 0372408608</p>
+        <p>E-Mail: nguyenquyet@gmail.com</p>
+      </div>
+    </div>
+    <!-- header end -->
+    <!--Invoice -->
+
+    <h1 style="text-align: center; margin-top: 10px">Hoá đơn</h1>
+    <!--company name-->
+    <div class="companyName">
+      <div>
+        <p>
+          Khách hàng :
+          <span id="customerName" th:text="${order.receiverName}"></span>
+          <br />
+          Địa chỉ:
+          <span id="customerAddress" th:text="${order.receiverAddress}"></span>
+          <br />
+          Số điện thoại:
+          <span id="customerPhone" th:text="${order.receiverPhone}"></span>
+        </p>
+      </div>
+    </div>
+
+    <!--company name end-->
+    <!--table-->
+    <div class="table">
+      <table>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Sản phẩm</th>
+            <th>Size</th>
+            <th>Số lượng</th>
+            <th>Giá</th>
+            <th>Tổng tiền</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+        <th:block th:each="orderItem, index: ${order.orderDetail}">
+          <tr>
+            <td th:text="${index.index}"></td>
+            <td>
+              <h4 th:text="${orderItem.productName}"></h4>
+            </td>
+            <td th:text="${orderItem.size}"></td>
+            <td th:text="${orderItem.quantity}"></td>
+            <td class="text-price" th:text="${orderItem.price} + ' đ'"></td>
+            <td>
+              <span class="text-price" th:text="${orderItem.quantity * orderItem.price} + ' đ'" style="font-weight: bold; font-size: 20px"></span>
+            </td>
+          </tr>
+        </th:block>
+          <!--total footer-->
+          <tr class="total-footer">
+            <td colspan="5" style="text-align: right; font-weight: bold; font-size: 22px">
+              Tổng tiền tất cả
+            </td>
+            <td id="total" class="text-price" style="font-weight: bold; font-size: 22px" th:text="${order.totalPrice} + ' đ'"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!--table end-->
+    <!--footer-->
+    <div class="footer">
+      <div>
+        <p>
+          Hình thức thanh toán: <br />
+          <span id="amount-in-words" style="font-weight: bold; font-size: 20px">Thanh toán khi nhận hàng</span>
+        </p>
+      </div>
+      <div class="footer-bottom">
+        <div class="declaration">
+          <p>
+            <span style="font-size: large; font-weight: bold">
+              Lưu ý:</span>
+            <br />
+
+            Quý khách nên quay lại video khi mở hàng làm bằng chứng nếu hàng thiếu, hàng sai,
+            hàng vỡ, ... để cửa hàng xử lý.
+          </p>
+        </div>
+<!--        <div>-->
+<!--          <p style="margin-bottom: 20px">Người lập hoá đơn</p>-->
+<!--          <p>..................................</p>-->
+<!--          <p>Nguyễn Hữu Quyết</p>-->
+<!--        </div>-->
+      </div>
+    </div>
+    <div>
+    </div>
+  </main>
+  <th:block id="js-resources">
+    <script th:inline="javascript">
+        window.print();
+    </script>
+  </th:block>
+</body>
+</html>

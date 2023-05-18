@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .main {
+    margin: 0 auto;
+    padding: 20px 10px;
+    width: 800px;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: semi-bold;
+  }
+  
+  .companyInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: semi-bold;
+    font-size: 20px;
+  }
+  .companyName {
+    font-size: 20px;
+    font-weight: semi-bold;
+    margin-right: 10px;
+  }
+  
+  .table table {
+    margin-top: 10px;
+    width: 100%;
+    text-align: left;
+    height: 700px;
+  }
+  
+  .table th {
+    padding: 5px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .table td {
+    padding: 5px;
+    text-align: center;
+    padding: 5px;
+    vertical-align: top;
+  }
+  
+  table tr td:nth-child(2),
+  table tr td:last-child {
+    text-align: left;
+  }
+  table tr td:nth-child(6) {
+    min-width: 55px;
+  }
+  
+  table,
+  th {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  td {
+    border-left: 1px solid black;
+  }
+  
+  .total-footer {
+    height: 10px;
+    border-top: 1px solid black;
+  }
+  .footer {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: semi-bold;
+  }
+  .declaration {
+    margin-top: 15px;
+    width: 50%;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }

@@ -1,0 +1,55 @@
+<th:block th:fragment="header">
+    <header class="header">
+        <div class="header-middle">
+            <div class="container">
+                <div class="header-left col-lg-2 w-auto pl-0">
+                    <button class="mobile-menu-toggler text-primary mr-2" type="button">
+                        <i class="icon-menu"></i>
+                    </button>
+                    <a href="/" class="logo">
+                        <img th:src="@{/shop/images/imageaaa.png}"  alt="logo">
+                    </a>
+                </div><!-- End .header-left -->
+
+                <div class="header-right w-lg-max">
+                    <div class="header-icon header-icon header-search header-search-inline header-search-category w-lg-max text-right">
+                        <a href="#" class="search-toggle search-button" role="button"><i class="icon-search-3"></i></a>
+                            <div class="header-search-wrapper" style="border:1px solid black">
+                                <input class="form-control search-input"  placeholder="Tìm kiếm..." required>
+                                <button class="btn icon-search-3 p-0 search-button" type="submit"></button>
+                            </div><!-- End .header-search-wrapper -->
+                    </div><!-- End .header-search -->
+
+                    <div class="header-contact d-none d-lg-flex pl-4 ml-3 mr-xl-5 pr-4">
+                        <img alt="phone" th:src="@{/shop/images/phone1.jpg}" width="80" height="80" class="pb-1">
+                        <h6 style="text-align: center">Hotline<a href="tel:#" class="text-dark font1">0372 408 608</a></h6>
+                    </div>
+
+                    <a href="/gio-hang" class="fa fa-shopping-cart header-icon cart-user-login" style="font-size:28px;color:black">
+                    </a>
+                    <a href="" data-toggle="modal" data-target="#exampleModal" class="header-icon account-setting"><i class="icon-user-2"></i></a>
+
+                </div><!-- End .header-right -->
+            </div><!-- End .container -->
+        </div><!-- End .header-middle -->
+
+        <div class="header-bottom sticky-header d-none d-lg-block">
+            <div class="container">
+                <nav class="main-nav w-100" style="text-align: center">
+                    <ul class="menu" style="display: inline-block;">
+                        <li style="color: black">
+                            <a style="color: black;font-weight: bold;font-size: 20px" href="/">Trang chủ</a>
+                        </li>
+<!--                        <th:block th:each="brand : ${brands}">-->
+<!--                            <li><a href="/" th:text="${brand.name}">Trang chủ</a></li>-->
+<!--                        </th:block>-->
+                        <li class=""><a style="color: black;font-weight: bold;font-size: 20px" href="/san-pham">Sản phẩm</a></li>
+                        <li class=""><a style="color: black;font-weight: bold;font-size: 20px" href="/tin-tuc">Tin tức</a></li>
+                        <li class=""><a style="color: black;font-weight: bold;font-size: 20px" href="/doi-hang">Chính sách</span></a></li>
+                        <li class=""><a style="color: black;font-weight: bold;font-size: 20px" href="/lien-he" class="px-4">Liên hệ</a></li>
+                    </ul>
+                </nav>
+            </div><!-- End .container -->
+        </div><!-- End .header-bottom -->
+    </header><!-- End .header -->
+</th:block>
